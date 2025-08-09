@@ -1,29 +1,55 @@
 #include <stdio.h>
- 
+
+#define tamanho 10
+#define agua 0
+#define navio1 3
+#define navio2 4
+
 int main() {
 
-    int tabuleiro[10][10];
+    int tabuleiro[tamanho][tamanho];
 
     //Informar que tabuleiro é valor 0   
-    for (int i = 0; i < 10; i++){   
-        for (int j = 0; j < 10; j++){
-            tabuleiro[i][j] = 0;      // 0 = valor para agua  
+    for (int i = 0; i < tamanho; i++){   
+        for (int j = 0; j < tamanho; j++){
+            tabuleiro[i][j] = agua;      // 0 = valor para agua  
         }
     }
 
     // Navio horizontal
-    tabuleiro[0][7] = 3;  // 3 valor para o lugar que está o navio
-    tabuleiro[0][8] = 3;
-    tabuleiro[0][9] = 3;
+    int linha = 5, coluna = 0;
+    for (int i = 0; i < navio1; i++)  {
+            tabuleiro[linha][coluna + i] = navio1;      
+    }
+    
 
     // Navio vertical
-    tabuleiro[4][3] = 3;
-    tabuleiro[5][3] = 3;
-    tabuleiro[6][3] = 3;
-    tabuleiro[7][3] = 3;
+    int linha3 = 0, coluna3 = 7;
+    for (int j = 0; j < navio2; j++)  {
+            tabuleiro[linha3 + j][coluna3] = navio2;      
+    }
 
-    for (int i = 0; i < 10; i++){   
-        for (int j = 0; j < 10; j++){
+    // Navio diagonal
+
+    int linha1 = 2, coluna1 = 2;
+    if (linha1 + navio1 <= tamanho && coluna1 + navio1 <= tamanho) {
+        for (int i = 0; i < navio1; i++)  {
+            tabuleiro[linha1 + i][coluna1 + i] = navio1;
+        }
+        
+    }
+    int linha2 = 4, coluna2 = 8;
+    if (linha2 + navio2 <= tamanho && coluna2 - (navio2 - 1) >= 0) {
+        for (int i = 0; i < navio2; i++)  {
+            tabuleiro[linha2 + i][coluna2 - i] = navio2;
+        }
+        
+    }
+    
+    printf("---Batalha Naval---\n");
+
+    for (int i = 0; i < tamanho; i++){   
+        for (int j = 0; j < tamanho; j++){
             printf("%d ", tabuleiro[i][j]);   // tabuleiro com os navios 
         }
         printf("\n"); //espaço entre os valores
